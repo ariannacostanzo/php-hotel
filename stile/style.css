@@ -6,3 +6,21 @@ body {
 thead th.head {
     background-color: rgb(155, 192, 172);
 }
+
+.check {
+    
+    text-align: center;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.check-green {
+    background-color: green;
+}
+
+
+.check-red {
+    background-color: red;
+}
