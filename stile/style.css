@@ -1,0 +1,8 @@
+body {
+    background: linear-gradient(#30b4c5, #d1dac9);
+    height: 100vh;
+}
+
+thead th.head {
+    background-color: rgb(155, 192, 172);
+}
