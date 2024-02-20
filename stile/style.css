@@ -24,9 +24,10 @@ thead th.head {
 }
 
 .check {
-
-    text-align: center;
-    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     width: 20px;
     height: 20px;
     border-radius: 50%;
