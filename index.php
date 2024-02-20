@@ -2,10 +2,7 @@
 include 'includes/data.php';
 
 $parking = $_GET['parking'] ?? '';
-var_dump($parking);
-
 $vote = $_GET['vote'] ?? '';
-var_dump($vote);
 ?>
 
 <!DOCTYPE html>
@@ -31,14 +28,14 @@ var_dump($vote);
                     <option value="yes_parking">Con parcheggio</option>
                     <option value="no_parking">Senza parcheggio</option>
                 </select>
-                <select class="form-select" name="vote" id="vote">
+                <!-- <select class="form-select" name="vote" id="vote">
                     <option value="" selected disabled hidden>Scegli in base alle stelle</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                </select>
+                </select> -->
                 <button class="btn btn-success">Filtra</button>
             </form>
         </header>
@@ -46,29 +43,20 @@ var_dump($vote);
     <table class="table table-hover ">
         <thead>
             <tr>
-            <th class="head" scope="col">Nome</th>
-            <th class="head" scope="col">Descrizione</th>
-            <th class="head" scope="col">Parcheggio</th>
-            <th class="head" scope="col">Stelle</th>
-            <th class="head" scope="col">Distanza dal centro</th>
+                <th class="head" scope="col">Nome</th>
+                <th class="head" scope="col">Descrizione</th>
+                <th class="head" scope="col">Parcheggio</th>
+                <th class="head" scope="col">Stelle</th>
+                <th class="head" scope="col">Distanza dal centro</th>
             </tr>
         </thead>
         <tbody>
+            
             <!-- se ho parcheggio mostro quelli con parcheggio -->
             <?php if($parking === 'yes_parking'): ?>
                 <?php foreach ($hotels as $hotel):?>
                     <?php if ($hotel['parking']): ?>
-                        <tr>
-                            <td><?= $hotel['name'] ?></td>
-                            <td><?= $hotel['description'] ?></td>
-                            <td>
-                                <div class="check check-green">
-                                    <i class="fa-solid fa-check"></i>
-                                </div>
-                            </td>
-                            <td><?= $hotel['vote'] ?></td>
-                            <td><?= $hotel['distance_to_center'] ?></td>
-                        </tr>
+                        <?php include __DIR__ . '/includes/template.php' ?>
                     <?php endif ?>
                 <?php endforeach ?>
 
@@ -76,45 +64,19 @@ var_dump($vote);
             <?php elseif($parking === 'no_parking'): ?>
                 <?php foreach ($hotels as $hotel):?>
                     <?php if (!$hotel['parking']): ?>
-                        <tr>
-                            <td><?= $hotel['name'] ?></td>
-                            <td><?= $hotel['description'] ?></td>
-                            <td>
-                                <div class="check check-red">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            </td>
-                            <td><?= $hotel['vote'] ?></td>
-                            <td><?= $hotel['distance_to_center'] ?></td>
-                        </tr>
+                        <?php include __DIR__ . '/includes/template.php' ?>
                     <?php endif ?>
                 <?php endforeach ?>
 
             <!--altrimenti mostro tutti -->
             <?php else: ?>
                 <?php foreach ($hotels as $hotel): ?>
-                    <tr>
-                        <td><?= $hotel['name'] ?></td>
-                        <td><?= $hotel['description'] ?></td>
-                        <td>
-                            <?php if($hotel['parking']): ?>
-                                <div class="check check-green">
-                                    <i class="fa-solid fa-check"></i>
-                                </div>
-                            <?php else: ?>
-                                <div class="check check-red">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            <?php endif ?>
-                        </td>
-                        <td><?= $hotel['vote'] ?></td>
-                        <td><?= $hotel['distance_to_center'] ?></td>
-                    </tr>
+                    <?php include __DIR__ . '/includes/template.php' ?>
                 <?php endforeach ?>
             <?php endif ?>
+
         </tbody>
         <tbody>
-
 
 </tbody>
     </table>
