@@ -3,12 +3,28 @@ body {
     height: 100vh;
 }
 
+h3 {
+    font-size: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+h3::after {
+    content: '';
+    width: 50%;
+    height: 5px;
+    background-color: #212529;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
 thead th.head {
     background-color: rgb(155, 192, 172);
 }
 
 .check {
-    
+
     text-align: center;
     line-height: 20px;
     width: 20px;
