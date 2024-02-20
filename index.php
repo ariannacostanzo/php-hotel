@@ -61,9 +61,38 @@ if ($parking === 'yes_parking') {
         </thead>
         <tbody>
             <?php if($parking === 'yes_parking'): ?>
-                hotel con parcheggio
+                <?php foreach ($hotels as $hotel):?>
+                    <?php if ($hotel['parking']): ?>
+                        <tr>
+                            <td><?= $hotel['name'] ?></td>
+                            <td><?= $hotel['description'] ?></td>
+                            <td>
+                                <div class="check check-green">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            </td>
+                            <td><?= $hotel['vote'] ?></td>
+                            <td><?= $hotel['distance_to_center'] ?></td>
+                        </tr>
+                    <?php endif ?>
+                <?php endforeach ?>
+                
             <?php elseif($parking === 'no_parking'): ?>
-                hotel senza parcheggio
+                <?php foreach ($hotels as $hotel):?>
+                    <?php if (!$hotel['parking']): ?>
+                        <tr>
+                            <td><?= $hotel['name'] ?></td>
+                            <td><?= $hotel['description'] ?></td>
+                            <td>
+                                <div class="check check-red">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </td>
+                            <td><?= $hotel['vote'] ?></td>
+                            <td><?= $hotel['distance_to_center'] ?></td>
+                        </tr>
+                    <?php endif ?>
+                <?php endforeach ?>
             <?php else: ?>
                 <?php foreach ($hotels as $hotel): ?>
                     <tr>
