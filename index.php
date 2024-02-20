@@ -4,14 +4,8 @@ include 'includes/data.php';
 $parking = $_GET['parking'] ?? '';
 var_dump($parking);
 
-if ($parking === 'yes_parking') {
-
-} elseif ($parking === 'no_parking') {
-
-} else {
-
-}
-
+$vote = $_GET['vote'] ?? '';
+var_dump($vote);
 ?>
 
 <!DOCTYPE html>
@@ -33,18 +27,18 @@ if ($parking === 'yes_parking') {
             <h3 class="my-5">Hotels</h3>
             <form action="index.php" method="GET" class="d-flex align-items-center gap-3">
                 <select class="form-select" name="parking" id="parking">
-                    <option value="">Scegli in base al parcheggio</option>
+                    <option value="" selected disabled hidden >Scegli in base al parcheggio</option>
                     <option value="yes_parking">Con parcheggio</option>
                     <option value="no_parking">Senza parcheggio</option>
                 </select>
-                <!-- <select class="form-select" name="vote" id="vote">
-                    <option value="">Scegli in base alle stelle</option>
+                <select class="form-select" name="vote" id="vote">
+                    <option value="" selected disabled hidden>Scegli in base alle stelle</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                </select> -->
+                </select>
                 <button class="btn btn-success">Filtra</button>
             </form>
         </header>
@@ -60,6 +54,7 @@ if ($parking === 'yes_parking') {
             </tr>
         </thead>
         <tbody>
+            <!-- se ho parcheggio mostro quelli con parcheggio -->
             <?php if($parking === 'yes_parking'): ?>
                 <?php foreach ($hotels as $hotel):?>
                     <?php if ($hotel['parking']): ?>
@@ -76,7 +71,8 @@ if ($parking === 'yes_parking') {
                         </tr>
                     <?php endif ?>
                 <?php endforeach ?>
-                
+
+            <!-- se non ho parcheggio mostro quelli senza parcheggio -->
             <?php elseif($parking === 'no_parking'): ?>
                 <?php foreach ($hotels as $hotel):?>
                     <?php if (!$hotel['parking']): ?>
@@ -93,6 +89,8 @@ if ($parking === 'yes_parking') {
                         </tr>
                     <?php endif ?>
                 <?php endforeach ?>
+
+            <!--altrimenti mostro tutti -->
             <?php else: ?>
                 <?php foreach ($hotels as $hotel): ?>
                     <tr>
@@ -115,6 +113,10 @@ if ($parking === 'yes_parking') {
                 <?php endforeach ?>
             <?php endif ?>
         </tbody>
+        <tbody>
+
+
+</tbody>
     </table>
 </body>
 </html>
