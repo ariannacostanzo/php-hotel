@@ -19,16 +19,34 @@ include 'includes/data.php'
 </head>
 <body>
     <div class="container my-5">
-        <h3 class="my-5">Hotels</h3>
+        <header class="d-flex align-items-center justify-content-between">
+            <h3 class="my-5">Hotels</h3>
+            <form action="index.php" method="GET" class="d-flex align-items-center gap-3">
+                <select class="form-select" name="parking" id="parking">
+                    <option value="">Scegli in base al parcheggio</option>
+                    <option value="parking">Con parcheggio</option>
+                    <option value="no_parking">Senza parcheggio</option>
+                </select>
+                <select class="form-select" name="vote" id="vote">
+                    <option value="">Scegli in base alle stelle</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button class="btn btn-success">Filtra</button>
+            </form>
+        </header>
 
     <table class="table table-hover ">
         <thead>
             <tr>
-            <th class="head" scope="col">Name</th>
-            <th class="head" scope="col">Description</th>
-            <th class="head" scope="col">Parking</th>
-            <th class="head" scope="col">Vote</th>
-            <th class="head" scope="col">Distance to Center</th>
+            <th class="head" scope="col">Nome</th>
+            <th class="head" scope="col">Descrizione</th>
+            <th class="head" scope="col">Parcheggio</th>
+            <th class="head" scope="col">Stelle</th>
+            <th class="head" scope="col">Distanza dal centro</th>
             </tr>
         </thead>
         <tbody>
