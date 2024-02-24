@@ -4,6 +4,11 @@ include 'includes/data.php';
 $parking = $_GET['parking'] ?? '';
 $vote = $_GET['vote'] ?? '';
 
+function filterHotelsByVote($array, $value) {
+    $array = array_filter($array, function ($item) use ($value) {
+        return $item['vote'] >= $value;
+    });
+}
 
 
 if ($parking === 'yes_parking') {
@@ -16,7 +21,27 @@ if ($parking === 'yes_parking') {
     });
 }   
 
-
+if ($vote == 1) {
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['vote'] >= 1;
+    });
+} else if ($vote == 2) {
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['vote'] >= 2;
+    });
+}   else if ($vote == 3) {
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['vote'] >= 3;
+    });
+}   else if ($vote == 4) {
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['vote'] >= 4;
+    });
+}   else if ($vote == 5) {
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['vote'] >= 5;
+    });
+}   
 
 ?>
 
@@ -38,20 +63,20 @@ if ($parking === 'yes_parking') {
         <header class="d-flex align-items-center justify-content-between">
             <h3 class="my-5">Hotels</h3>
             <form action="index.php" method="GET" class="d-flex align-items-center gap-3">
-                <select class="form-select" name="parking" id="parking">
-                    <option value="" selected disabled hidden >Scegli in base al parcheggio</option>
-                    <option value="all">Tutti</option>
-                    <option value="yes_parking">Con parcheggio</option>
-                    <option value="no_parking">Senza parcheggio</option>
+            <label for="parking">Seleziona in base al parcheggio:</label>
+            <select class="form-select" name="parking" id="parking">
+                    <option value="all" <?= $parking === 'all' ? 'selected' : '' ?>>Tutti</option>
+                    <option value="yes_parking" <?= $parking === 'yes_parking' ? 'selected' : '' ?>>Con parcheggio</option>
+                    <option value="no_parking" <?= $parking === 'no_parking' ? 'selected' : '' ?>>Senza parcheggio</option>
                 </select>
-                <!-- <select class="form-select" name="vote" id="vote">
-                    <option value="" selected disabled hidden>Scegli in base alle stelle</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select> -->
+                <label for="parking">Seleziona in base al voto:</label>
+                <select class="form-select" name="vote" id="vote">
+                    <option value="1" <?= $vote == 1 ? 'selected' : '' ?>>1</option>
+                    <option value="2" <?= $vote == 2 ? 'selected' : '' ?>>2</option>
+                    <option value="3" <?= $vote == 3 ? 'selected' : '' ?>>3</option>
+                    <option value="4" <?= $vote == 4 ? 'selected' : '' ?>>4</option>
+                    <option value="5" <?= $vote == 5 ? 'selected' : '' ?>>5</option>
+                </select>
                 <button class="btn btn-success">Filtra</button>
             </form>
         </header>
