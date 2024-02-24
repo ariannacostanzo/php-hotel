@@ -3,6 +3,21 @@ include 'includes/data.php';
 
 $parking = $_GET['parking'] ?? '';
 $vote = $_GET['vote'] ?? '';
+
+
+
+if ($parking === 'yes_parking') {
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['parking'] === true;
+    });
+} else if ($parking === 'no_parking') {
+    $hotels = array_filter($hotels, function ($hotel) {
+        return $hotel['parking'] === false;
+    });
+}   
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +40,7 @@ $vote = $_GET['vote'] ?? '';
             <form action="index.php" method="GET" class="d-flex align-items-center gap-3">
                 <select class="form-select" name="parking" id="parking">
                     <option value="" selected disabled hidden >Scegli in base al parcheggio</option>
+                    <option value="all">Tutti</option>
                     <option value="yes_parking">Con parcheggio</option>
                     <option value="no_parking">Senza parcheggio</option>
                 </select>
@@ -52,28 +68,9 @@ $vote = $_GET['vote'] ?? '';
         </thead>
         <tbody>
             
-            <!-- se ho parcheggio mostro quelli con parcheggio -->
-            <?php if($parking === 'yes_parking'): ?>
-                <?php foreach ($hotels as $hotel):?>
-                    <?php if ($hotel['parking']): ?>
-                        <?php include __DIR__ . '/includes/template.php' ?>
-                    <?php endif ?>
-                <?php endforeach ?>
-
-            <!-- se non ho parcheggio mostro quelli senza parcheggio -->
-            <?php elseif($parking === 'no_parking'): ?>
-                <?php foreach ($hotels as $hotel):?>
-                    <?php if (!$hotel['parking']): ?>
-                        <?php include __DIR__ . '/includes/template.php' ?>
-                    <?php endif ?>
-                <?php endforeach ?>
-
-            <!--altrimenti mostro tutti -->
-            <?php else: ?>
                 <?php foreach ($hotels as $hotel): ?>
                     <?php include __DIR__ . '/includes/template.php' ?>
                 <?php endforeach ?>
-            <?php endif ?>
 
         </tbody>
         <tbody>
