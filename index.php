@@ -4,44 +4,8 @@ include 'includes/data.php';
 $parking = $_GET['parking'] ?? '';
 $vote = $_GET['vote'] ?? '';
 
-function filterHotelsByVote($array, $value) {
-    $array = array_filter($array, function ($item) use ($value) {
-        return $item['vote'] >= $value;
-    });
-}
 
-
-if ($parking === 'yes_parking') {
-    $hotels = array_filter($hotels, function ($hotel) {
-        return $hotel['parking'] === true;
-    });
-} else if ($parking === 'no_parking') {
-    $hotels = array_filter($hotels, function ($hotel) {
-        return $hotel['parking'] === false;
-    });
-}   
-
-if ($vote == 1) {
-    $hotels = array_filter($hotels, function ($hotel) {
-        return $hotel['vote'] >= 1;
-    });
-} else if ($vote == 2) {
-    $hotels = array_filter($hotels, function ($hotel) {
-        return $hotel['vote'] >= 2;
-    });
-}   else if ($vote == 3) {
-    $hotels = array_filter($hotels, function ($hotel) {
-        return $hotel['vote'] >= 3;
-    });
-}   else if ($vote == 4) {
-    $hotels = array_filter($hotels, function ($hotel) {
-        return $hotel['vote'] >= 4;
-    });
-}   else if ($vote == 5) {
-    $hotels = array_filter($hotels, function ($hotel) {
-        return $hotel['vote'] >= 5;
-    });
-}   
+include 'includes/script.php';
 
 ?>
 
@@ -81,26 +45,25 @@ if ($vote == 1) {
             </form>
         </header>
 
-    <table class="table table-hover ">
-        <thead>
-            <tr>
-                <th class="head" scope="col">Nome</th>
-                <th class="head" scope="col">Descrizione</th>
-                <th class="head" scope="col">Parcheggio</th>
-                <th class="head" scope="col">Stelle</th>
-                <th class="head" scope="col">Distanza dal centro</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-                <?php foreach ($hotels as $hotel): ?>
-                    <?php include __DIR__ . '/includes/template.php' ?>
-                <?php endforeach ?>
-
-        </tbody>
-        <tbody>
-
-</tbody>
-    </table>
+        <?php if(empty($hotels)): ?>
+            <p>Non ci sono hotel con i requisiti che hai scelto.</p>
+        <?php else: ?>
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <th class="head" scope="col">Nome</th>
+                        <th class="head" scope="col">Descrizione</th>
+                        <th class="head" scope="col">Parcheggio</th>
+                        <th class="head" scope="col">Stelle</th>
+                        <th class="head" scope="col">Distanza dal centro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <?php foreach ($hotels as $hotel): ?>
+                            <?php include __DIR__ . '/includes/template.php' ?>
+                        <?php endforeach ?>
+                </tbody>
+            </table>
+        <?php endif ?>
 </body>
 </html>
